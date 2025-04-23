@@ -7,6 +7,7 @@ import Header from "./components/Header";
 export default function App() {
   const [items, setItems] = useState([])
   const [cartItems, setCartItems] = useState([])
+  const [searchValue, setSearchValue] = useState('')
   const [cartOpened, setCartOpened] = useState(false)
 
   useEffect(()=>{
@@ -19,6 +20,10 @@ export default function App() {
     setCartItems(prev => [...prev, obj])
   }
 
+  const onChangeSearchInput = (event) => {
+    setSearchValue(event.target.value)
+  }
+
   return (
     <>
       <div className="wrapper clear">
@@ -27,10 +32,10 @@ export default function App() {
 
         <div className="content p-40">
           <div className="d-flex align-center justify-between mb-40">
-            <h1>Все кроссовки</h1>
+            <h1>{searchValue ? `Поиск по запросу: "${searchValue}"`: 'Все кроссовки'}</h1>
             <div className="search-block d-flex">
               <img src="/img/search.svg" alt="Search" />
-              <input placeholder="Поиск..." />
+              <input onChange={onChangeSearchInput} value={searchValue} placeholder="Поиск..." />
             </div>
           </div>
 
