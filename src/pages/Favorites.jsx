@@ -1,4 +1,6 @@
-export default function Favorites(){
+import Card from '../components/Card/Card'
+
+export default function Favorites({ items, onAddToFavorite }){
   return (
     <div className="content p-40">
       <div className="d-flex align-center justify-between mb-40">
@@ -6,7 +8,14 @@ export default function Favorites(){
       </div>
 
       <div className="d-flex flex-wrap">
-        Тут будут мои закладки
+        {items.map(item => (
+          <Card
+            key={item.imageUrl} 
+            favorited={true}
+            onFavorite={onAddToFavorite}
+            {...item}
+          />
+        ))}
       </div>
     </div>
   )
